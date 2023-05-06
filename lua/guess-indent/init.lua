@@ -95,7 +95,7 @@ function M.guess_from_buffer()
   -- How many spaces are used for indentation
   local spaces = {}
   -- How many spaces are used for indentation relative to the previous level
-  local relative_spaces = { }
+  local relative_spaces = {}
 
   -- This stack keeps track of all indentation levels (absolute) in the
   -- current indentation block. This is used to calculate the current
@@ -195,7 +195,7 @@ function M.guess_from_buffer()
         while spaces_indent_stack[#spaces_indent_stack] > space_count do
           last_popped_indent = table.remove(spaces_indent_stack)
         end
-        
+
         -- Get abs. indentation of previous level in current block
         local prev_indent = 0
         if spaces_indent_stack[#spaces_indent_stack] == space_count then
@@ -276,7 +276,7 @@ function M.guess_from_buffer()
       end
 
       -- Large penalty for absurdly large indentation
-      if (n_spaces > 8) then
+      if n_spaces > 8 then
         score = score - 1
       end
 
